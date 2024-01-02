@@ -12,10 +12,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/base/base.module').then((m) => m.BaseModule),
   },
-  //* Permite acceder al script del widget desde otros sitios web
-  {
-    path: 'app/common/assets/library'
-  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
