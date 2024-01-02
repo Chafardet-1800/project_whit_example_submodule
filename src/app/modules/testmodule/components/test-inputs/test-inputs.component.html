@@ -1,0 +1,125 @@
+
+<div class="row justify-content-center h-100 pt-3">
+
+  <!-- Título -->
+  <h3 class="text-center">Prueba de inputs:</h3>
+
+  <!-- Form para probar inputs -->
+  <form [formGroup]="componentForm" class="col-12 h-100 p-3">
+
+
+    <!-- Contenedor de input de selección -->
+    <div class="row align-items-center">
+
+      <h5>Input de selección:</h5>
+
+      <!-- Input de selección normal-->
+      <cmm-cmp-i-select *ngIf="selectMode == 'select'" class="col-sm-8" formControlName="select" [implementCustomInput]="true" selectMode="select" label="Input de selección" placeholder="Ej: uno" [optionsList]="selectList" optionKey="id" optionName="name" (inputChange)="doSomething()" [displayImages]="true" imagesRoute="../app/common/assets/images/covers/" imageSearchKey="img"></cmm-cmp-i-select>
+
+      <!-- Input de selección con autocompletado -->
+      <cmm-cmp-i-select *ngIf="selectMode == 'autocomplete'" class="col-sm-8" formControlName="select" [implementCustomInput]="true" selectMode="autocomplete" label="Input de selección" placeholder="Ej: uno" [optionsList]="selectList" optionKey="id" optionName="name" (inputChange)="doSomething()" [displayImages]="true" imagesRoute="../app/common/assets/images/covers/" imageSearchKey="img"></cmm-cmp-i-select>
+
+      <!-- Input de selección con diálogo -->
+      <cmm-cmp-i-select *ngIf="selectMode == 'dialog'" class="col-sm-8" formControlName="select" [implementCustomInput]="true" selectMode="dialog" label="Input de selección" placeholder="Ej: uno" [optionsList]="selectList" optionKey="id" optionName="name" (inputChange)="doSomething()" [displayImages]="true" imagesRoute="../app/common/assets/images/covers/" imageSearchKey="img"></cmm-cmp-i-select>
+
+      <div class="col-sm-4">
+        <h5>Modos de selección:</h5>
+
+        <!-- Para elegir tipo de modo de input -->
+        <mat-radio-group class="d-flex flex-column cursor-pointer" formControlName="selectMode">
+          <mat-radio-button *ngFor="let type of selectModes" [checked]="type == 'select'" [value]="type" (change)="resetControl('select',type)">{{type}}</mat-radio-button>
+        </mat-radio-group>
+
+      </div>
+
+    </div>
+
+    <!-- Contenedor de input de email -->
+    <div class="row">
+
+      <h5>Input de email:</h5>
+
+      <!-- Input de email -->
+      <cmm-cmp-i-email [implementCustomInput]="true" [subscriptSizing]="'dynamic'" formControlName="email" label="Email" placeholder="Ej: lol@lol.lol"></cmm-cmp-i-email>
+
+    </div>
+
+    <!-- Contenedor de input de texto -->
+    <div class="row">
+
+      <h5>Input de texto:</h5>
+
+      <!-- Input de texto -->
+      <cmm-cmp-i-text formControlName="text" label="Texto" [minLength]="4" placeholder="Ej: loquesea" patternMessageType="incorrectPattern" replaceMessage="casas"></cmm-cmp-i-text>
+
+    </div>
+
+    <!-- Contenedor de input de monto -->
+    <div class="row">
+
+      <h5>Input de monto:</h5>
+
+      <!-- Input de texto -->
+      <!-- <cmm-cmp-i-text formControlName="text" label="Texto" [minLength]="4" placeholder="Ej: loquesea"></cmm-cmp-i-text> -->
+      <cmm-cmp-i-amount formControlName="amount" label="Monto" placeholder="Ej: 5 BS" currencyName="BS"></cmm-cmp-i-amount>
+
+    </div>
+
+    <!-- Contenedor de input de fecha -->
+    <div class="row">
+
+      <h5>Input de fecha:</h5>
+
+      <!-- Input de fecha -->
+      <cmm-cmp-i-date formControlName="singleDate" label="Fecha"></cmm-cmp-i-date>
+
+    </div>
+
+    <!-- Contenedor de input de fecha con rango -->
+    <div class="row">
+
+      <h5>Input de fecha con rango:</h5>
+
+      <!-- Fechas con rango -->
+      <cmm-cmp-i-date selectDateMode="range" [rangeControls]="['startDate','endDate']" label="Rango de fechas" toLocaleDateString="en-EN" (inputChange)="doSomething()">
+      </cmm-cmp-i-date>
+
+    </div>
+
+    <!-- Contenedor de input de OTP -->
+    <div class="row">
+
+      <h5>Input de OTP</h5>
+
+      <!-- Input OTP -->
+      <cmm-cmp-i-otp formControlName="otp" placeholder="Ej: CC1234" [reloadTime]="5" [allowCopy]="true" [allowCut]="true" [allowClicWithMouse]="true" [tokenRequested]="tokenRequested" (submitRequest)="requestToken()"></cmm-cmp-i-otp>
+
+    </div>
+
+    <!-- Contenedor de contraseña -->
+    <div class="row">
+
+      <h5>Input de contraseña</h5>
+
+      <!-- Input de contraseña -->
+      <cmm-cmp-i-password formControlName="password" label="Contraseña" placeholder="Ej: Usuario-1" [showAssistanceMessages]="true"></cmm-cmp-i-password>
+
+    </div>
+
+    <!-- Contenedor de input de archivo -->
+    <div class="row">
+
+      <h5>Input de archivo:</h5>
+
+      <!-- Input de archivo -->
+      <cmm-cmp-i-smfile formControlName="file" label="Archivo" [maxFileSize]="2"></cmm-cmp-i-smfile>
+
+    </div>
+
+    <!-- Botón de submit -->
+    <cmm-cmp-b-button (submit)="onSubmit()"></cmm-cmp-b-button>
+
+  </form>
+
+</div>
+

@@ -1,6 +1,6 @@
 {
   "name": "project-whit-example-submodule",
-  "version": "0.0.004",
+  "version": "0.0.005",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

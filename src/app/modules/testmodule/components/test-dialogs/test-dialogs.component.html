@@ -1,0 +1,14 @@
+<div class="row h-100">
+
+  <!-- Título -->
+  <h3 class="text-center">Prueba de diálogos:</h3>
+
+  <!-- Botones de abrir diálogo -->
+  <div *ngFor="let option of dialogTypes" class="col-6 p-3">
+
+    <!-- Botón de abrir diálogo -->
+    <cmm-cmp-b-button [button_text]="option.buttonText" (submit)="openDialogType(option.type)"></cmm-cmp-b-button>
+
+  </div>
+
+</div>

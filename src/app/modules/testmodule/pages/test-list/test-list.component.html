@@ -1,0 +1,10 @@
+<div class="container pb-4">
+
+  <div class="m-auto py-4">
+
+    <!-- Tabla comun -->
+    <cmm-cmp-t-main [header]="header" [rows]="rows" [filterFull]="filterFull" [lengthList]="lengthList" [filtersObject]="filtersObject" (requesthttp)="requetshttp($event)" (emitActionDone)="routerFunction($event)" (emitClearFilter)="clearFilter()"></cmm-cmp-t-main>
+
+  </div>
+
+</div>

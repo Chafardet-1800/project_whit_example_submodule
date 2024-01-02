@@ -1,0 +1,106 @@
+<section class="container mt-4">
+
+  <div class="row justify-content-center">
+
+    <h6 class="col-12 text-center">Indique los datos del receptor de la devolución</h6>
+
+    <!-- Aquí empieza el formulario -->
+    <form *ngIf="componentForm" [formGroup]="componentForm" class="col-10 col-sm-8 col-lg-6 justify-content-center align-items-center p-0 mt-3">
+
+      <!-- Input de seleccionar banco -->
+      <div class="row w-100 m-0 mb-2">
+        <cmm-cmp-i-select
+        class="p-0"
+        formControlName="idBank"
+        [optionsList]="bankList"
+        [implementCustomInput]="true"
+        placeholder="Ej: Banco de Venezuela"
+        label="Seleccione un banco"
+        optionKey="bankId"
+        selectMode="autocomplete"
+        optionName="bankDescription"
+        >
+        </cmm-cmp-i-select>
+      </div>
+
+      <!-- Número de teléfono -->
+      <div class="row w-100 m-0 mb-2">
+        <cmm-cmp-i-text
+        class="p-0"
+        formControlName="phoneNumber"
+        [minLength]="phonelength"
+        [maxLength]="11"
+        [onlyNumber]="true"
+        replaceMessage="teléfono"
+        label="Teléfono"
+        placeholder="Ej: 04241356800"
+        [implementCustomInput]="true"
+        >
+        </cmm-cmp-i-text>
+      </div>
+
+      <!-- Documento -->
+      <div class="row w-100 m-0 mb-3">
+        <div class="col-12 col-sm-6 col-md-4 p-0 pe-sm-1">
+          <cmm-cmp-i-select
+          formControlName="idDocumentType"
+          [optionsList]="documentTypeList"
+          [implementCustomInput]="true"
+          placeholder="Ej: V"
+          label="Doc."
+          optionKey="documentTypeId"
+          selectMode="autocomplete"
+          optionName="documentTypeName"
+          >
+          </cmm-cmp-i-select>
+        </div>
+        <div class="col-12 col-sm-6 col-md-8 p-0 ps-sm-1">
+          <cmm-cmp-i-text
+          formControlName="documentNumber"
+          label="Nro. de documento"
+          placeholder="Ej: 12345678"
+          [minLength]="7"
+          [maxLength]="10"
+          [onlyNumber]="true"
+          [implementCustomInput]="true"
+          >
+          </cmm-cmp-i-text>
+        </div>
+      </div>
+
+      <!-- Monto -->
+      <div class="row w-100 m-0 mb-2">
+        <cmm-cmp-i-amount
+        class="p-0"
+        formControlName="amount"
+        [onlyNumber]="true"
+        currencyName="BS"
+        [maxLength]="27"
+        [implementCustomInput]="true"
+        >
+        </cmm-cmp-i-amount>
+      </div>
+
+      <!-- Contenedor del input de descripcion -->
+      <div class="row w-100 m-0 mb-3">
+
+        <!-- Descripción -->
+        <cmm-cmp-i-text
+        class="p-0"
+        formControlName="description"
+        label="Descripción"
+        placeholder="Ej: Depósito para mi cuenta"
+        [implementCustomInput]="true"
+        >
+        </cmm-cmp-i-text>
+
+      </div>
+
+      <!-- Boton para enviar el formulario -->
+      <cmm-cmp-b-button class="w-100 p-0 m-0" (submit)="onSubmit()" button_text="Realizar devolución"></cmm-cmp-b-button>
+
+    </form>
+
+  </div>
+
+</section>

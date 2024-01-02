@@ -1,0 +1,37 @@
+<div class="row align-items-center justify-content-center pt-5">
+
+  <!-- Contenedor del form -->
+  <div class="col-12 col-md-8">
+
+    <!-- Titulo de form -->
+    <h5 class="text-center mb-3">Formulario de depósito</h5>
+
+    <!-- Form -->
+    <form *ngIf="componentForm" [formGroup]="componentForm">
+
+      <!-- Banco emisor -->
+      <cmm-cmp-i-select [implementCustomInput]="true" label="Banco emisor" formControlName="issuingBank" [optionsList]="banksList" optionName="bankDescription" optionKey="bankId"></cmm-cmp-i-select>
+
+      <!-- Banco receptor -->
+      <cmm-cmp-i-select [implementCustomInput]="true" label="Banco receptor" formControlName="receivingBank" [optionsList]="banksList" optionName="bankDescription" optionKey="bankId"></cmm-cmp-i-select>
+
+      <!-- Monto -->
+      <cmm-cmp-i-amount [implementCustomInput]="true" formControlName="amount"></cmm-cmp-i-amount>
+
+      <!-- Fecha del depósito -->
+      <cmm-cmp-i-date label="Fecha de depósito" formControlName="date" [typeFilterDate]="1"></cmm-cmp-i-date>
+
+      <!-- Descripción -->
+      <cmm-cmp-i-text [implementCustomInput]="true" label="Descripción" formControlName="description"></cmm-cmp-i-text>
+
+      <!-- Documento -->
+      <cmm-cmp-i-smfile label="Imagen de referencia" formControlName="document"></cmm-cmp-i-smfile>
+
+    </form>
+
+    <!-- Botón de enviar form -->
+    <cmm-cmp-b-button (submit)="onSubmit()"></cmm-cmp-b-button>
+
+  </div>
+
+</div>

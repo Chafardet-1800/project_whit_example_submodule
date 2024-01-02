@@ -1,0 +1,85 @@
+<div class="vh-100">
+    <cmm-cmp-spinner class="vh-100" *ngIf="spinner"></cmm-cmp-spinner>
+
+    <!-- Control de versión -->
+    <cmm-cmp-version-control id="version_control"></cmm-cmp-version-control>
+
+    <!-- Navbar -->
+    <mat-toolbar class="p-0" id="toolbar">
+
+      <div class="cc-bg-navbar w-100 h-100 d-flex justify-content-between align-items-center">
+
+        <!-- Logo Brand -->
+        <img [src]="chinchinWhiteLogo" alt="" class="ms-3" style="width: 140px; height: fit-content;">
+
+        <!-- Input para poner token -->
+        <cmm-cmp-i-text class="col-5 py-1 rounded" [implementCustomInput]="true" [formControl]="tokenForm" [subscriptSizing]="'dynamic'" label="Token"></cmm-cmp-i-text>
+
+        <!-- Icono Usuario -->
+        <button class="d-none d-md-block h-100 px-3" mat-button [matMenuTriggerFor]="beforeMenu">
+          <img class="m-0" [src]="chinchinUserIcon" alt="" style="width: 35px;">
+        </button>
+
+        <!-- Icono menu -->
+        <button class="d-block h-100 d-md-none px-3" mat-button [matMenuTriggerFor]="beforeMenu">
+          <img class="m-0" [src]="chinchinMenuIcon" alt="" style="width: 35px;">
+        </button>
+
+        <!-- Menu Expandible -->
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+
+            <!-- Info User -->
+            <div class="col-8 mx-auto mt-3" style="max-width: 200px;">
+              <p class="m-0 text-center fs-16 cc-txt-bold cc-txt">{{ '@'+userBackoffice.userName}}</p>
+            </div>
+
+            <!-- Divider -->
+            <div class="d-flex m-0 col-12 justify-content-center">
+              <p class="w-auto m-0 px-3">______________________________</p>
+            </div>
+
+            <!-- Menu options -->
+            <div class="my-2">
+
+              <a class="base-button cursor-pointer cc-txt-a cc-txt d-flex col-9 justify-content-start align-items-center mx-auto p-0 my-3"
+              href="testmodule/room">
+                <mat-icon>list_alt</mat-icon>
+                <p class="m-0 p-0 ps-2">Ejemplo de componentes</p>
+              </a>
+
+              <a class="base-button cursor-pointer cc-txt-a cc-txt d-flex col-9 justify-content-start align-items-center mx-auto p-0 my-3"
+              href="users/options">
+                <mat-icon>assignment</mat-icon>
+                <p class="m-0 p-0 ps-2">Ejemplo de módulo</p>
+              </a>
+
+            </div>
+
+        </mat-menu>
+
+      </div>
+
+    </mat-toolbar>
+
+    <!-- Container -->
+    <mat-drawer-container>
+
+        <!-- Container and Footer -->
+        <mat-drawer-content>
+
+          <!-- Contenedor del componente de la vista -->
+          <div id="page-container" class="overflow-hidden pb-2" style="min-height: 87vh;">
+
+            <!-- Area para colocar el componente correspondiente segun la ruta -->
+            <router-outlet></router-outlet>
+
+          </div>
+
+          <!-- Footer -->
+          <cmm-cmp-footer [envVersion]="version"></cmm-cmp-footer>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+
+</div>

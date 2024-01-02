@@ -1,0 +1,28 @@
+<!--  -->
+<cmm-cmp-spinner *ngIf="spinner"></cmm-cmp-spinner>
+
+<section id="login" class="container" style="max-width: 400px;">
+
+  <!-- Formualrio de login -->
+  <form [formGroup]="loginForm" class="row" autocomplete="off" >
+
+      <!-- Imagen y Titulo -->
+      <div class="col-12 text-center mb-1">
+          <img [src]="chinchinShapeLogo" style="width: 130px; height: 130px" />
+          <h4 class="cc-txt">Iniciar sesión</h4>
+      </div>
+
+      <!-- Nombre de usuario -->
+      <cmm-cmp-i-text [implementCustomInput]="true" class="my-2" [label]="'Usuario / Correo electrónico'" [placeholder]="'Ingrese el usuario'" [minLength]="3" [maxLength]="20" formControlName="username"></cmm-cmp-i-text>
+
+      <!-- Contraseña -->
+      <cmm-cmp-i-password class="my-2" [implementCustomInput]="true" [label]="'Contraseña'" [placeholder]="'Ingrese el usuario'" [minLength]="8" [maxLength]="20" formControlName="password"></cmm-cmp-i-password>
+
+      <!-- Button -->
+      <div class="col-12 text-center">
+          <cmm-cmp-b-button [button_text]="'Ingresar'" [buttonType]="'success'" (submit)="onSubmit()"></cmm-cmp-b-button>
+      </div>
+
+  </form>
+
+</section>
