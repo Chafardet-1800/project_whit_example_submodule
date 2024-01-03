@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { phoneRegex } from 'src/app/commun/src/app/data/forms/models/input.models';
-import { setSpinner } from 'src/app/commun/src/app/data/utils/reducer/utils.actions';
-import { CmmDataService } from 'src/app/commun/src/app/services/data.service';
-import { CmmDialogService } from 'src/app/commun/src/app/services/dialogs.service';
-import { mustHaveLetter } from 'src/app/commun/src/app/validators/format.validator';
+import { phoneRegex } from 'src/app/common/src/app/data/forms/models/input.models';
+import { setSpinner } from 'src/app/common/src/app/data/utils/reducer/utils.actions';
+import { CmmDataService } from 'src/app/common/src/app/services/data.service';
+import { CmmDialogService } from 'src/app/common/src/app/services/dialogs.service';
+import { mustHaveLetter } from 'src/app/common/src/app/validators/format.validator';
 import { PasarelaService } from '../../services/pasarela.service';
-import { CmmAlertModalModel } from 'src/app/commun/src/app/data/dialogs/models/dialogs.model';
-import { CmmUtilsService } from 'src/app/commun/src/app/services/utils.service';
-import { CmmComponentFormModel } from 'src/app/commun/src/app/data/forms/models/form.model';
-import { CmmBanksModel } from 'src/app/commun/src/app/data/utils/models/utils.model';
+import { CmmAlertModalModel } from 'src/app/common/src/app/data/dialogs/models/dialogs.model';
+import { CmmUtilsService } from 'src/app/common/src/app/services/utils.service';
+import { CmmComponentFormModel } from 'src/app/common/src/app/data/forms/models/form.model';
+import { CmmBanksModel } from 'src/app/common/src/app/data/utils/models/utils.model';
 
 @Component({
   selector: 'pag-test-form',

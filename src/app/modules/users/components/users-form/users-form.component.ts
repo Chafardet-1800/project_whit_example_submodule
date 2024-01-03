@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { CmmDataService } from 'src/app/commun/src/app/services/data.service';
-import { CmmComponentFormModel } from 'src/app/commun/src/app/data/forms/models/form.model';
+import { CmmDataService } from 'src/app/common/src/app/services/data.service';
+import { CmmComponentFormModel } from 'src/app/common/src/app/data/forms/models/form.model';
 import { UsersService } from '../../services/users.service';
 import { Store } from '@ngrx/store';
-import { setSpinner } from 'src/app/commun/src/app/data/utils/reducer/utils.actions';
-import { CmmUtilsService } from 'src/app/commun/src/app/services/utils.service';
+import { setSpinner } from 'src/app/common/src/app/data/utils/reducer/utils.actions';
+import { CmmUtilsService } from 'src/app/common/src/app/services/utils.service';
 
 @Component({
   selector: 'cmp-users-form',

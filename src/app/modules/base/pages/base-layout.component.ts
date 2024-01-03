@@ -3,13 +3,13 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { authTokenVariable, userLoggedVariable } from 'src/app/commun/src/app/data/constants/local-storage-variables';
-import { CmmAlertModalModel } from 'src/app/commun/src/app/data/dialogs/models/dialogs.model';
-import { spinner } from 'src/app/commun/src/app/data/utils/reducer/utils.selector';
-import { CmmDataService } from 'src/app/commun/src/app/services/data.service';
-import { CmmDialogService } from 'src/app/commun/src/app/services/dialogs.service';
-import { CmmTimerSessionService } from 'src/app/commun/src/app/services/timer-session.service';
-import { chinchinMenuIcon, chinchinUserIcon, chinchinWhiteLogo } from 'src/app/commun/src/assets/images/images-routes';
+import { authTokenVariable, userLoggedVariable } from 'src/app/common/src/app/data/constants/local-storage-variables';
+import { CmmAlertModalModel } from 'src/app/common/src/app/data/dialogs/models/dialogs.model';
+import { spinner } from 'src/app/common/src/app/data/utils/reducer/utils.selector';
+import { CmmDataService } from 'src/app/common/src/app/services/data.service';
+import { CmmDialogService } from 'src/app/common/src/app/services/dialogs.service';
+import { CmmTimerSessionService } from 'src/app/common/src/app/services/timer-session.service';
+import { chinchinMenuIcon, chinchinUserIcon, chinchinWhiteLogo } from 'src/app/common/src/assets/images/images-routes';
 import { Subject, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -214,7 +214,7 @@ export class BaseLayoutComponent implements OnInit {
    */
   listenSpinnerChanges() {
 
-    // Observamos el estado del spinner en commun
+    // Observamos el estado del spinner en common
     this.store.select(spinner)
     .pipe(
       // Indicamos que esta funcion se ejecutara hasta que el indique lo contario

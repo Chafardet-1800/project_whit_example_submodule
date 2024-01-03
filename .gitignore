@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 #Submodules
-.src/app/commun
+.src/app/common

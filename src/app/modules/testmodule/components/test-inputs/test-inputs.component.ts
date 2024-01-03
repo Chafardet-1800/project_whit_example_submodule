@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { selectModes } from 'src/app/commun/src/app/components/inputs/input-select/input-select.component';
-import { CmmComponentFormModel } from 'src/app/commun/src/app/data/forms/models/form.model';
-import { fileSize, fileType, passwordValidators } from 'src/app/commun/src/app/validators/format.validator';
+import { selectModes } from 'src/app/common/src/app/components/inputs/input-select/input-select.component';
+import { CmmComponentFormModel } from 'src/app/common/src/app/data/forms/models/form.model';
+import { fileSize, fileType, passwordValidators } from 'src/app/common/src/app/validators/format.validator';
 
 @Component({
   selector: 'cmp-test-inputs',

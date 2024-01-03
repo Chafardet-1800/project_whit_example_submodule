@@ -5,7 +5,7 @@ import { AuthLayoutComponent } from './pages/auth-layout/auth-layout.component';
 import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 import { AuthLoginFormComponent } from './components/auth-login-form/auth-login-form.component';
-import { CmmModule } from 'src/app/commun/src/app/commun.module';
+import { CmmModule } from 'src/app/common/src/app/common.module';
 
 @NgModule({
   declarations: [AuthLayoutComponent, AuthLoginFormComponent],

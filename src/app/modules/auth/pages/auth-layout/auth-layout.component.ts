@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { boAuthCover } from 'src/app/commun/src/assets/images/images-routes';
+import { boAuthCover } from 'src/app/common/src/assets/images/images-routes';
 
 @Component({
   selector: 'pag-auth-layout',
