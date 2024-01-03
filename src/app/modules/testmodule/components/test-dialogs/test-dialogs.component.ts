@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CmmAlertModalModel, CmmAlertToastrModel, CmmQuestionDialogModel, CmmSelectDialogModel } from 'commun/src/app/data/dialogs/models/dialogs.model';
-import { CmmDialogService } from 'commun/src/app/services/dialogs.service';
+import { CmmAlertModalModel, CmmAlertToastrModel, CmmQuestionDialogModel, CmmSelectDialogModel } from 'src/app/commun/src/app/data/dialogs/models/dialogs.model';
+import { CmmDialogService } from 'src/app/commun/src/app/services/dialogs.service';
 
 @Component({
   selector: 'cmp-test-dialogs',

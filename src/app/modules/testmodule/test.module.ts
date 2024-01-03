@@ -8,7 +8,7 @@ import { TestRoomLayoutComponent } from './pages/test-room-layout/test-room-layo
 import { TestInputsComponent } from './components/test-inputs/test-inputs.component';
 import { TestDialogsComponent } from './components/test-dialogs/test-dialogs.component';
 import { TestApisComponent } from './components/test-apis/test-apis.component';
-import { CmmModule } from 'commun/src/app/commun.module';
+import { CmmModule } from 'src/app/commun/src/app/commun.module';
 
 @NgModule({
   declarations: [

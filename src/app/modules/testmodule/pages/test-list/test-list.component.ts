@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { CmmTableHeader, CmmStatusTypeGroupsModel, CmmComponentTableModel, CmmTableRow } from 'commun/src/app/data/tables/models/tables.model';
-import { setSpinner } from 'commun/src/app/data/utils/reducer/utils.actions';
-import { CmmDataService } from 'commun/src/app/services/data.service';
-import { CmmDialogService } from 'commun/src/app/services/dialogs.service';
+import { CmmTableHeader, CmmStatusTypeGroupsModel, CmmComponentTableModel, CmmTableRow } from 'src/app/commun/src/app/data/tables/models/tables.model';
+import { setSpinner } from 'src/app/commun/src/app/data/utils/reducer/utils.actions';
+import { CmmDataService } from 'src/app/commun/src/app/services/data.service';
+import { CmmDialogService } from 'src/app/commun/src/app/services/dialogs.service';
 import { clearDepositFilter, setDepositFilter } from 'src/app/core/reducer/module.actions';
 import { DepositFilterModel } from 'src/app/core/reducer/module.models';
 import { initialDepositFilter } from 'src/app/core/reducer/module.reducers';
 import { depositFilter } from 'src/app/core/reducer/module.selectors';
 import { DepositsModel } from '../../models/deposits.model';
 import { DepositService } from '../../services/deposit.service';
-import { CmmAlertToastrModel } from 'commun/src/app/data/dialogs/models/dialogs.model';
-import { CmmUtilsService } from 'commun/src/app/services/utils.service';
+import { CmmAlertToastrModel } from 'src/app/commun/src/app/data/dialogs/models/dialogs.model';
+import { CmmUtilsService } from 'src/app/commun/src/app/services/utils.service';
 
 @Component({
   selector: 'pag-test-list',

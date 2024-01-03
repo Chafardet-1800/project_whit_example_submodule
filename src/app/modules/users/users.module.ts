@@ -7,7 +7,7 @@ import { UsersOptionsLayoutComponent } from './pages/users-options-layout/users-
 import { UsersRoutingModule } from './users-routing.module';
 import { UserListLayoutComponent } from './pages/user-list-layout/user-list-layout.component';
 import { UserFormLayoutComponent } from './pages/user-form-layout/user-form-layout.component';
-import { CmmModule } from 'commun/src/app/commun.module';
+import { CmmModule } from 'src/app/commun/src/app/commun.module';
 
 
 @NgModule({

@@ -5,11 +5,11 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LoginModel } from '../../models/auth.model';
-import { chinchinShapeLogo } from 'commun/src/assets/images/images-routes';
-import { CmmDialogService } from 'commun/src/app/services/dialogs.service';
-import { CmmDataService } from 'commun/src/app/services/data.service';
-import { authExpirationTime, userLoggedVariable } from 'commun/src/app/data/constants/local-storage-variables';
-import { CmmAlertToastrModel } from 'commun/src/app/data/dialogs/models/dialogs.model';
+import { chinchinShapeLogo } from 'src/app/commun/src/assets/images/images-routes';
+import { CmmDialogService } from 'src/app/commun/src/app/services/dialogs.service';
+import { CmmDataService } from 'src/app/commun/src/app/services/data.service';
+import { authExpirationTime, userLoggedVariable } from 'src/app/commun/src/app/data/constants/local-storage-variables';
+import { CmmAlertToastrModel } from 'src/app/commun/src/app/data/dialogs/models/dialogs.model';
 
 @Component({
   selector: 'cmp-auth-login-form',
