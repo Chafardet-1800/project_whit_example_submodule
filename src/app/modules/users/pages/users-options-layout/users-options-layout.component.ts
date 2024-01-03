@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CmmModuleActionOption } from 'src/app/common/src/app/data/privileges/models/privileges.models';
-import { coverApproved } from 'src/app/common/src/assets/images/images-routes';
+import { coverApproved } from 'src/app/common/assets/images/images-routes';
+import { CmmModuleActionOption } from 'src/app/common/data/privileges/models/privileges.models';
 
 @Component({
   selector: 'pag-users-options-layout',

@@ -9,14 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { CmmDataService } from 'src/app/common/src/app/services/data.service';
-import { CmmTimerSessionService } from 'src/app/common/src/app/services/timer-session.service';
-import { CmmDialogService } from 'src/app/common/src/app/services/dialogs.service';
-import { CmmAuthGuard } from 'src/app/common/src/app/guards/auth.guard';
-import { CmmHttpInterceptor } from 'src/app/common/src/app/interceptors/http.interceptor';
+import { CmmDataService } from 'src/app/common/services/data.service';
+import { CmmTimerSessionService } from 'src/app/common/services/timer-session.service';
+import { CmmDialogService } from 'src/app/common/services/dialogs.service';
+import { CmmAuthGuard } from 'src/app/common/guards/auth.guard';
+import { CmmHttpInterceptor } from 'src/app/common/interceptors/http.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { reducers } from 'src/app/core/reducer';
-import { CmmModule } from 'src/app/common/src/app/common.module';
+import { CmmModule } from 'src/app/common/common.module';
 
 @NgModule({
   declarations: [

@@ -2,7 +2,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { BaseLayoutComponent } from "./pages/base-layout.component";
-import { CmmAuthGuard } from "src/app/common/src/app/guards/auth.guard";
+import { CmmAuthGuard } from "src/app/common/guards/auth.guard";
 
 const routes: Routes = [
   {

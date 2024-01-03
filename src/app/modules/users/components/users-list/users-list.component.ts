@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { CmmComponentTableModel, CmmTableColumnErrorMsg, CmmTableHeader, CmmTableRow, CmmStatusTypeGroupsModel } from 'src/app/common/src/app/data/tables/models/tables.model';
-import { setSpinner } from 'src/app/common/src/app/data/utils/reducer/utils.actions';
-import { CmmDataService } from 'src/app/common/src/app/services/data.service';
-import { CmmDialogService } from 'src/app/common/src/app/services/dialogs.service';
+import { CmmComponentTableModel, CmmTableColumnErrorMsg, CmmTableHeader, CmmTableRow, CmmStatusTypeGroupsModel } from 'src/app/common/data/tables/models/tables.model';
+import { setSpinner } from 'src/app/common/data/utils/reducer/utils.actions';
+import { CmmDataService } from 'src/app/common/services/data.service';
+import { CmmDialogService } from 'src/app/common/services/dialogs.service';
 import { clearWithdrawFilter, setWithdrawFilter } from 'src/app/core/reducer/module.actions';
 import { WithdrawFilterModel } from 'src/app/core/reducer/module.models';
 import { withdrawFilter } from 'src/app/core/reducer/module.selectors';
 import { WidthdrawModel } from '../../models/users.model';
 import { UsersService } from '../../services/users.service';
-import { CmmAlertToastrModel } from 'src/app/common/src/app/data/dialogs/models/dialogs.model';
+import { CmmAlertToastrModel } from 'src/app/common/data/dialogs/models/dialogs.model';
 
 @Component({
   selector: 'cmp-users-list',

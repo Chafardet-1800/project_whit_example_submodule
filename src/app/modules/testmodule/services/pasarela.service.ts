@@ -1,7 +1,7 @@
 import { HttpClient, HttpContext, HttpContextToken, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { USE_SPINNER } from 'src/app/common/src/app/data/utils/models/utils.model';
+import { USE_SPINNER } from 'src/app/common/data/utils/models/utils.model';
 
 
 @Injectable({

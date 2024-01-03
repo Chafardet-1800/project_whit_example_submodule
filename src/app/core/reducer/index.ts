@@ -1,9 +1,9 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 import { ModulesReducer, ModulesState } from './module.reducers';
-import { UtilsReducer } from 'src/app/common/src/app/data/utils/reducer/utils.reducer';
-import { CmmUtilsStateModel } from 'src/app/common/src/app/data/utils/models/utils.model';
-import { TablesReducer, TablesState } from 'src/app/common/src/app/data/tables/reducer/tables.reducer';
+import { UtilsReducer } from 'src/app/common/data/utils/reducer/utils.reducer';
+import { CmmUtilsStateModel } from 'src/app/common/data/utils/models/utils.model';
+import { TablesReducer, TablesState } from 'src/app/common/data/tables/reducer/tables.reducer';
 
 export interface AppState {
   CmmTable: TablesState;
