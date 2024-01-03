@@ -1,0 +1,134 @@
+@use '@angular/material' as mat;
+@import "../../styles/scss/variables.scss";
+
+//*Seteo este color como una variable para que pueda ser seteado de forma dinámica
+$dynamic_primary: var(--v-cc-dynamic-primary);
+
+@include mat.core();
+
+/* Paleta de colores de chinchin modo claro */
+$chinchin-palette: (
+    50 : #e3f8f4,
+    100 : #b9eee4,
+    200 : #8ae3d2,
+    300 : #5bd7bf,
+    400 : #37cfb2,
+    500 : $dynamic_primary,
+    600 : #12c09c,
+    700 : #0eb992,
+    800 : #0bb189,
+    900 : #06a478,
+    A100 : #d0fff0,
+    A200 : $dynamic_primary,
+    A400 : #6affd0,
+    A700 : #50ffc8,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : $dynamic_primary,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+// Indicamos como color pricipal el numero 500 de la paleta de colores claros de chinchin
+$primary-theme: mat.define-palette($chinchin-palette, 500);
+
+// Indicamos como color secundario, usado para resaltar, los numeros A200, A100, A400 de la paleta de colores claros de chinchin
+$accent-theme: mat.define-palette($chinchin-palette, A200, A100, A400);
+
+// Definimos el tema claro de chinchin con los colores seleccionados
+$chinchin-theme: mat.define-light-theme((
+ color: (
+   primary:$primary-theme,
+   accent: $accent-theme,
+   )
+));
+
+// Cambios en las variable de material
+:root {
+
+  // Clase de todos los inputs que tienen la clase outline
+  .mdc-text-field--outlined{
+
+    // Variable que define el radio del borde para los inputs de tipo outline
+    --mdc-outlined-text-field-container-shape:  #{$dynamic_border_radios};
+
+  }
+
+  // Clase de todos los contenedores tipo card de material
+  .mat-mdc-card{
+
+    // Variable que define el radio del borde para los contenedores tipo card de material
+    --mdc-elevated-card-container-shape:  #{$dynamic_border_radios};
+
+  }
+
+  // Clase de todos los contenedores tipo expancion-panel de material
+  .mat-expansion-panel{
+
+    // Variable que define el radio del borde para los contenedores tipo expancion-panel de material
+    --mat-expansion-container-shape:  #{$dynamic_border_radios};
+
+  }
+
+  // Clase de todos los dialogos tipo pop-up
+  .mat-mdc-dialog-container{
+
+    // Variable que define el radio del borde para los dialogos
+    --mdc-dialog-container-shape: #{$dynamic_border_radios};
+
+  }
+
+  // Clase de todos los dialogos tipo menu expandido
+  .mat-mdc-menu-panel{
+
+    // Variable que define el radio del borde para los dialogos
+    --mat-menu-container-shape: #{$dynamic_border_radios};
+
+  }
+
+  // Clase de todos los dialogos tipo snackbar
+  .mat-mdc-snack-bar-container{
+
+    // Variable que define el radio del borde para los dialogos
+    --mdc-snackbar-container-shape: #{$dynamic_border_radios};
+
+  }
+
+  // Clase de todos los dialogos tipo tooltip
+  .mat-mdc-tooltip{
+
+    // Variable que define el radio del borde para los dialogos
+    --mdc-plain-tooltip-container-shape: #{$dynamic_border_radios};
+
+  }
+
+  // Variable que define el radio del borde para los botones
+  --mdc-text-button-container-shape: #{$dynamic_border_radios_button};
+
+  // Variable que define el radio del borde para los botones protegidos
+  --mdc-protected-button-container-shape: #{$dynamic_border_radios_button};
+
+  // Variable que define el radio del borde para la clase de bootstrap
+  --bs-border-radius: #{$dynamic_border_radios};
+
+}
+
+// Intengramos en el proyecto el tema claro de chinchin
+@include mat.core-theme($chinchin-theme);
+
+// Indicamos la densidad de los elementos en el proyecto
+@include mat.all-component-densities(0);
+
+// Indicamos el color base de todos los componente del proyecto como los colores de la paleta clara de chinchin
+@include mat.all-component-colors($chinchin-theme);

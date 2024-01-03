@@ -1,0 +1,53 @@
+<div *ngIf="!hideCover" class="row p-3 m-0 w-100  justify-content-center align-items-center card-border" [ngClass]="{'ccng-bgsecondary': coverType !=='unavailable'}">
+
+  <!-- Contenido principal del cover -->
+  <div class="d-flex justify-content-center row" [ngSwitch]="coverType">
+
+      <!-- Imágenes por cada tipo de cover -->
+
+      <img *ngSwitchCase="'pending'" loading="lazy" [src]="coverPending" alt="" class="img_limits">
+
+      <img *ngSwitchCase="'success'" loading="lazy" [src]="coverApproved" alt="" class="img_limits">
+
+      <img *ngSwitchCase="'successValidation'" loading="lazy" [src]="coverApprovedValidation" alt="" class="img_limits">
+
+      <img *ngSwitchCase="'warning'" loading="lazy" [src]="coverWarning" alt="" class="img_limits">
+
+      <img *ngSwitchCase="'error'" loading="lazy" [src]="coverRejected" alt="coverRejected">
+
+      <img *ngSwitchCase="'unavailable'" loading="lazy" [src]="coverAccessDenied" alt="coverAccessDenied" class="img_limits">
+
+      <img *ngSwitchCase="'noPrivilege'" loading="lazy" [src]="coverNoPrivilege" alt="coverNoPrivilege" class="img_limits">
+
+      <!-- Default -->
+      <img *ngSwitchDefault loading="lazy" [src]="coverEmptyState" alt="coverNoPrivilege" class="default_img_limits">
+
+      <!-- Titulo y texto -->
+      <div class="col-sm-12 mt-4 text-center cc-title-txt">
+
+        <!-- Título -->
+        <h5>{{ title }}</h5>
+
+        <!-- Texto -->
+        <p *ngIf="coverType !== 'noPrivilege'"> {{ message }}</p>
+
+      </div>
+
+      <!-- Privilegio -->
+      <span *ngIf="coverType == 'noPrivilege'" class="d-flex justify-content-center align-items-center mt-1">
+
+        <!-- Título de privilegio -->
+        <p *ngIf="privilege" class="m-0 p-0 cc-title-txt">Privilegio:</p>
+
+        <!-- Contiene el nombre del privilegio que falta -->
+        <mat-chip-listbox *ngIf="privilege">
+
+          <mat-chip class="cc-bg-error cc-txt-white mx-3" selected>{{getActionName(privilege)}}</mat-chip>
+
+        </mat-chip-listbox>
+
+      </span>
+
+  </div>
+
+</div>

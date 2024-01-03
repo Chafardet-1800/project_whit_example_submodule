@@ -1,0 +1,283 @@
+<section>
+
+  <!-- filtros -->
+  <div class="mb-4 bg-white rounded shadowBorder">
+      <!-- Título de la tabla -->
+      <div *ngIf="tableTitle" class="p-4 pb-0">
+        <h3>{{tableTitle}}</h3>
+      </div>
+
+      <!-- Filtro estatico search -->
+      <div *ngIf="showSearch && filterFull && !filtersForm" class="container-fluid">
+          <form class="col-12 col-md-6 p-3 m-0" [formGroup]="filterdata" novalidate autocomplete="off">
+              <div class="row">
+                  <mat-form-field appearance="outline" [subscriptSizing]="'dynamic'" class="col-12 p-0 px-sm-2">
+                      <mat-label>Buscar</mat-label>
+                      <input type="text" maxlength="100" formControlName="search" (change)="sendRequest(true)" (keyup)="setInitialPage()" (keyup.enter)="sendRequest(true)" matInput id="busqueda" [placeholder]="placeholder" />
+                      <mat-icon matSuffix style="cursor: pointer" (click)="sendRequest(true)">search</mat-icon>
+                  </mat-form-field>
+              </div>
+          </form>
+      </div>
+
+      <!-- Filtros dinamicos -->
+      <div *ngIf="filtersForm" class="container-fluid">
+
+          <!-- Titulo filtros -->
+          <div class="row cc-title-txt pt-2 align-items-center">
+              <!-- Iconos -->
+              <div class="col-12 p-2">
+                  <div class="row w-100 m-0 px-1 py-2 flex-row" [ngClass]="showDownloadButton?'justify-content-between':'justify-content-end'">
+                      <div *ngIf="showDownloadButton" style="max-width: 300px;">
+                          <cmm-cmp-b-button [button_text]="downloadButtonText" (submit)="downloadButton.emit()">
+                              <mat-icon class="me-1">save_alt</mat-icon>
+                          </cmm-cmp-b-button>
+                      </div>
+
+                      <!-- Caja de botones de control de tabla -->
+                      <div class="mt-2 mt-md-0" style="width: fit-content;">
+
+                          <!-- Icono de agregar -->
+                          <mat-icon *ngIf="!hideFilters && showAddButton" class="cursor-pointer me-4" [matTooltip]="addButtonText" (click)="addButtonEmit.emit()">add</mat-icon>
+
+                          <!-- Icono de refrescar -->
+                          <mat-icon *ngIf="!hideFilters && showRefreshButton" class="cursor-pointer me-4" [matTooltip]="refreshButtonText" (click)="sendRequest(true)">refresh</mat-icon>
+
+                          <!-- Icono borrar filtros -->
+                          <mat-icon *ngIf="!hideFilters" class="cursor-pointer me-4" matTooltip="Vaciar filtro" (click)="clearFilter()">delete_outline</mat-icon>
+
+                          <!-- Icono ocultar filtros -->
+                          <mat-icon class="me-4 cursor-pointer" [matTooltip]="hideFilters ? 'Mostrar filtros' : 'Ocultar filtros'" (click)="hideFilters = !hideFilters">filter_list</mat-icon>
+
+                      </div>
+
+                  </div>
+              </div>
+
+          </div>
+
+
+          <form @inOutAnimation *ngIf="!hideFilters" [formGroup]="filtersForm" novalidate autocomplete="off">
+
+              <div class="row align-items-center w-100 m-0">
+
+                  <!-- Formularios de escribir (inputs) normalmente search -->
+                  <div class="col-12 col-md-4 m-0 p-0" *ngFor="let item of filtersObject.inputs">
+                      <div class="row m-0">
+                          <mat-form-field appearance="outline" class="col-sm-12">
+                              <mat-label>{{item.label}}</mat-label>
+                              <input type="text" [formControlName]="item.form" (change)="sendRequest(true, true)" (keyup.enter)="sendRequest(true, true)" matInput [placeholder]="item.placeholder" [maxlength]="item.maxLength ? item.maxLength : 100" cmm-di-number-format [onlyNumber]="item.onlyNumber"/>
+                              <mat-icon matSuffix style="cursor: pointer" (click)="sendRequest(true, true)">search</mat-icon>
+
+                              <mat-error *ngIf="hasError(item.form, 'pattern') &&
+                              !hasError(item.form, 'required')">
+                                  El formato no es válido.
+                              </mat-error>
+                              <mat-error *ngIf="hasError(item.form, 'minlength') &&
+                              !hasError(item.form, 'maxlength') &&
+                              !hasError(item.form, 'pattern') &&
+                              !hasError(item.form, 'required')">
+                                  Debe escribir un mínimo de {{item.minLength}} caracteres.
+                              </mat-error>
+                              <mat-error *ngIf="hasError(item.form, 'maxlength') &&
+                              !hasError(item.form, 'pattern') &&
+                              !hasError(item.form, 'minlength') &&
+                              !hasError(item.form, 'required')">
+                                  Debe escribir un máximo de {{item.maxLength}} caracteres.
+                              </mat-error>
+                              <mat-error *ngIf="hasError(item.form, 'required') &&
+                              !hasError(item.form, 'maxlength') &&
+                              !hasError(item.form, 'minlength') &&
+                              !hasError(item.form, 'pattern')">
+                                  Este campo no puede estar vacío.
+                              </mat-error>
+                          </mat-form-field>
+                      </div>
+                  </div>
+
+                  <!-- Formularios de escribir (montos) normalmente amount -->
+                  <div class="col-12 col-md-4 m-0 p-0" *ngFor="let item of filtersObject.amounts">
+                      <div class="row m-0">
+                          <mat-form-field appearance="outline">
+                              <mat-label>{{item.label}}</mat-label>
+                              <input type="text" [formControlName]="item.form" cmm-di-amount-format inputmode="decimal" (keyup.enter)="sendRequest(true)" matInput maxlength="100" [placeholder]="item.placeholder" />
+
+                              <mat-error *ngIf="hasError(item.form, 'min') &&
+                              !hasError(item.form, 'max') &&
+                              !hasError(item.form, 'required')">
+                                  Debe escribir valor mayor a {{item.min}}.
+                              </mat-error>
+                              <mat-error *ngIf="hasError(item.form, 'max') &&
+                              !hasError(item.form, 'min') &&
+                              !hasError(item.form, 'required')">
+                                  Debe escribir valor menor a {{item.max}}.
+                              </mat-error>
+                              <mat-error *ngIf="hasError(item.form, 'required') &&
+                              !hasError(item.form, 'max') &&
+                              !hasError(item.form, 'min')">
+                                  Este campo no puede estar vacío.
+                              </mat-error>
+                          </mat-form-field>
+                      </div>
+                  </div>
+
+                  <!-- Formularios de select  -->
+                  <div class="col-12 col-md-4 m-0 p-0" *ngFor="let item of filtersObject.selects">
+                      <div class="row m-0">
+                          <mat-form-field appearance="outline" class="col-sm-12">
+                              <mat-label>{{item.label}}</mat-label>
+                              <mat-select [placeholder]="item.placeholder" floatlLabel="never" [formControlName]="item.form" (selectionChange)="sendRequest(true)">
+                                  <mat-option [value]="option[item.value]" *ngFor="let option of item.list">
+                                      {{ option[item.name] }}
+                                  </mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                      </div>
+                  </div>
+
+                  <!-- Formulario de fecha normal -->
+                  <div class="col-12 col-md-4 m-0 p-0" *ngFor="let item of filtersObject.dates">
+                    <div class="row m-0">
+                        <mat-form-field appearance="outline" class="col-sm-12">
+                            <mat-label>{{item.label}}</mat-label>
+                            <input matInput [matDatepicker]="picker" [formControlName]="item.form" id="datestar" [max]="daterange" (dateChange)="sendRequest(true)" (click)="picker.open()" readonly />
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <!-- Botón de limpiar -->
+                            <button *ngIf="filtersForm.controls[item.form]?.value" matSuffix mat-icon-button (click)="clearDate(item.form)">
+                              <mat-icon>delete_outline</mat-icon>
+                            </button>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                  </div>
+
+                  <!-- Formularios de fechas (dates) normalmente fecha inicio y fecha fin -->
+                  <div class="col-12 col-md-4 m-0 p-0" *ngFor="let item of filtersObject.rangeDates">
+                      <div class="row m-0">
+                          <mat-form-field appearance="outline" (click)="rangePicker.open()">
+                              <mat-label>{{item.label}}</mat-label>
+                              <mat-date-range-input [rangePicker]="rangePicker" [max]="daterange">
+                                <input matStartDate formControlName="startDate" placeholder="Fecha de inicio" readonly>
+                                <input matEndDate formControlName="endDate" placeholder="Fecha de fin" readonly>
+                              </mat-date-range-input>
+                              <mat-datepicker-toggle [class]="filtersForm.controls['startDate'].value ? 'cc-txt-primary' : ''" matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                              <!-- Botón de limpiar -->
+                              <button *ngIf="filtersForm.controls['startDate']?.value" matSuffix mat-icon-button (click)="clearDate('startDate', 'endDate')">
+                                <mat-icon>delete_outline</mat-icon>
+                              </button>
+                              <mat-date-range-picker #rangePicker>
+                                  <mat-date-range-picker-actions>
+                                    <button mat-button matDateRangePickerCancel>Cancelar</button>
+                                    <button mat-raised-button matDateRangePickerApply (click)="sendRequest()" class="cc-btn-primary" style="font-weight: 600;">Filtrar</button>
+                                  </mat-date-range-picker-actions>
+                              </mat-date-range-picker>
+                          </mat-form-field>
+                      </div>
+                  </div>
+
+              </div>
+
+          </form>
+
+      </div>
+
+  </div>
+
+  <!-- Contenedor de la tabla -->
+  <div *ngIf="rowListData.filteredData.length>0 else coverTable" class="overlaytable zoomtable rounded-top shadowBorder">
+
+    <!-- Elemento de tabla -->
+    <table mat-table [dataSource]="rowListData" matSort multiTemplateDataRows class="chinchin-table">
+
+      <!-- Contenedor de las columnas de la tabla -->
+      <ng-container [matColumnDef]="column" *ngFor="let column of columnFieldsList">
+
+          <!-- Celda con el Nombre de columna -->
+          <th mat-header-cell *matHeaderCellDef [ngClass]="getClassColumn(column)" class="fs-12 cc-txt text-nowrap">
+              {{ getTextColumn(column) }}
+          </th>
+
+          <!-- Celda de la columna -->
+          <td mat-cell *matCellDef="let element" [ngClass]="getClassColumn(column)" style="max-width: 200px;">
+
+            <!-- texto normal -->
+            <p *ngIf="!activateAction(column); else actionColumn" class="text-truncate m-0">
+                {{ element[column] }}
+            </p>
+
+            <!-- action -->
+            <ng-template #actionColumn>
+
+              <!-- Componente para celdas de acción -->
+              <cmm-cmp-t-actions [actionSelected]="element[column].nameAction" [element]="element[column]" (emitValue)="reciveActionDone($event)" [expandedElement]="expandedElement === element" (emitExpanded)="expandElement(element)">
+              </cmm-cmp-t-actions>
+
+            </ng-template>
+
+          </td>
+
+      </ng-container>
+
+      <!-- Contenedor de la columna detalle que muestra la vista expandible -->
+      <ng-container matColumnDef="detail" *ngIf="isDetailTable">
+
+        <!-- Celdas de vista de detalle expandible -->
+        <td mat-cell *matCellDef="let element" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" [attr.colspan]="columnFieldsList?.length">
+
+          <!-- Muestra cuelquier elemento expandible -->
+          <ng-content *ngIf="expandedElement === element">
+          </ng-content>
+
+        </td>
+
+      </ng-container>
+
+      <!-- Fila de encabezado de la tablas -->
+      <tr mat-header-row *matHeaderRowDef="columnFieldsList"></tr>
+
+      <!-- Fila de contenido para la tabla en caso de que sea una tabla con detalle -->
+      <span *ngIf="isDetailTable; else notDetail">
+
+        <!-- Filas de celdas de detalle -->
+        <tr mat-row *matRowDef="let element; columns: columnFieldsList" class="example-element-row"></tr>
+
+      </span>
+
+      <!-- Fila de contenido para la tabla en caso de que no sea una tabla con detalle -->
+      <ng-template #notDetail>
+
+        <!-- Filas de celdas que no son de tipo detalle -->
+        <tr mat-row *matRowDef="let element; columns: columnFieldsList"></tr>
+
+      </ng-template>
+
+      <!-- Fila extra que contiene el detalle -->
+      <span *ngIf="isDetailTable">
+
+        <!-- Filas de celdas de detalle -->
+        <tr mat-row *matRowDef="let row; columns: ['detail']" class="example-detail-row"></tr>
+
+      </span>
+
+    </table>
+
+  </div>
+
+  <!-- Paginado -->
+  <mat-paginator *ngIf="showPaginator && rowListData.filteredData.length>0" [pageSizeOptions]="sizeOptions" [length]="lengthList" [pageSize]="pageSize" class="overlaytable rounded-bottom shadowBorder" [pageIndex]="pageIndex" showFirstLastButtons (page)="paginationRequest($event)"
+      showFirstLastButtons>
+  </mat-paginator>
+
+</section>
+
+<!-- Contenedor principal del cover -->
+<ng-template #coverTable>
+
+  <div class="bg-white shadowBorder rounded">
+
+    <!-- cover de la tabla -->
+    <cmm-cmp-t-cover [messageCover]="coverMessage"></cmm-cmp-t-cover>
+
+  </div>
+
+</ng-template>

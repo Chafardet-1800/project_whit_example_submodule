@@ -1,0 +1,68 @@
+<div class="col-12">
+
+  <!-- Contenedor de input y botón -->
+  <div class="row w-100 mx-auto">
+
+    <!-- Contenedor del form -->
+    <div class="col-8 m-0 p-0 pe-1">
+
+      <!-- Form -->
+      <mat-form-field [subscriptSizing]="subscriptSizing" class="w-100 input-size" appearance="outline">
+
+        <!-- Label -->
+        <mat-label>{{label}}</mat-label>
+
+        <!-- Input -->
+        <input matInput type="text" [placeholder]="placeholder" [required]="required" cmm-di-number-format
+        [onlyNumber]="onlyNumber" [allowCopy]="allowCopy" [allowCut]="allowCut" [allowClicWithMouse]="allowClicWithMouse" [readonly]="readOnly" [minlength]="minLength" [maxlength]="maxLength"
+          [(ngModel)]="currentValue" [errorStateMatcher]="errorMatcher()" [disabled]="disabled" (blur)="onTouch()"
+          (input)="emitValue()" />
+
+        <!-- Mensajes de error del input -->
+
+        <!-- Required -->
+        <mat-error *ngIf="control?.errors?.['required']">
+          {{ CmmErrorMessagesObject.required }}
+        </mat-error>
+
+        <!-- Minlength -->
+        <mat-error
+          *ngIf="control?.errors?.['minlength'] && !control?.errors?.['required'] && !control?.errors?.['pattern']">
+          {{ CmmErrorMessagesObject.minLength }}
+        </mat-error>
+
+        <!-- Maxlength -->
+        <mat-error *ngIf="control?.errors?.['maxlength']">
+          {{ CmmErrorMessagesObject.maxLength }}
+        </mat-error>
+
+        <!-- Mensaje de error de tipo pattern -->
+        <mat-error
+          *ngIf="control?.errors?.['pattern'] && !control?.errors?.['required'] && !control?.errors?.['minlength'] && !control?.errors?.['maxlength']">
+          {{ CmmErrorMessagesObject.incorrectPattern }}
+        </mat-error>
+
+        <!-- Mensaje de error del API -->
+        <mat-error *ngIf="control?.errors?.['apiError']">
+          {{ control.errors?.['message']}}
+        </mat-error>
+
+      </mat-form-field>
+
+    </div>
+
+    <!-- Contenedor del botón -->
+    <div class="col-4 m-0 p-0 ps-1">
+
+      <!-- Botón para emitir señal de request -->
+      <cmm-cmp-b-button
+        [button_text]="tokenRequested && timeLeft? timeLeft + 's': 'Solicitar'"
+        [showSpinner]="showButtonSpinner" [buttonDisabled]="tokenRequested && timeLeft != 0"
+        style="min-height: 45px;" (submit)="requestCode()">
+      </cmm-cmp-b-button>
+
+    </div>
+
+  </div>
+
+</div>

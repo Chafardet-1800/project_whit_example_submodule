@@ -1,0 +1,33 @@
+<!-- Versión nueva del input -->
+<mat-form-field *ngIf="implementCustomInput" [subscriptSizing]="subscriptSizing" appearance="outline" class="w-100 p-0 input-size">
+
+  <!-- Label -->
+  <mat-label> {{ label }}</mat-label>
+
+  <!-- Input -->
+  <input matInput type="email" [(ngModel)]="currentValue" [placeholder]="placeholder"
+    [required]="required" autocomplete="off" [maxlength]="maxLength" [readonly]="readOnly"
+    [errorStateMatcher]="errorMatcher()" [disabled]="disabled" (blur)="onTouch()" (input)="emitValue()">
+
+  <!-- Mensajes de error del input -->
+  <mat-error *ngIf="control?.hasError('required')">
+    {{ CmmErrorMessagesObject.required }}
+  </mat-error>
+
+  <!-- Minlength -->
+  <mat-error *ngIf="control?.hasError('minlength') && !control?.hasError('required') ">
+    {{ CmmErrorMessagesObject.minLength }}
+  </mat-error>
+
+  <!-- Email -->
+  <mat-error
+    *ngIf="control?.hasError('email') && !control?.hasError('minlength') && !control?.hasError('required') && !control?.hasError('serverMsg')">
+    {{ CmmErrorMessagesObject.incorrectEmail }}
+  </mat-error>
+
+  <!-- Mensaje de error del API -->
+  <mat-error *ngIf="control?.errors?.['apiError']">
+    {{ control.errors?.['message']}}
+  </mat-error>
+
+</mat-form-field>

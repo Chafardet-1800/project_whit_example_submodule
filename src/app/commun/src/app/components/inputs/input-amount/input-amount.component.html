@@ -1,0 +1,47 @@
+
+<!-- Input con la nueva lógica de customInput -->
+<mat-form-field *ngIf="implementCustomInput" [subscriptSizing]="subscriptSizing" class="col-12 input-size" appearance="outline">
+  <!-- Label -->
+  <mat-label>{{label}}</mat-label>
+  <!-- Input -->
+  <input
+  matInput
+  inputmode="decimal"
+  cmm-di-amount-format
+  [decimal]="useDecimals"
+  [minlength]="minLength"
+  [maxlength]="maxLength"
+  [placeholder]="placeholder"
+  [currency]="currency.nameCurrency"
+  [required]="required"
+  [(ngModel)]="currentValue"
+  [errorStateMatcher]="errorMatcher()"
+  [disabled]="disabled"
+  [readonly]="readOnly"
+  (blur)="onTouch()"
+  (input)="emitValue()"
+  >
+
+  <!-- Símbolo de la moneda -->
+  <div *ngIf="currencyName" matSuffix class="d-flex justify-content-center align-items-center">
+    <p class="m-0 me-3">
+      {{' | ' + currencyName}}
+    </p>
+  </div>
+
+  <!-- Mensajes de error del input -->
+  <mat-error *ngIf="control?.hasError('required')">
+      {{ CmmErrorMessagesObject.required }}
+  </mat-error>
+
+  <!-- Monto mínimo permitido -->
+  <mat-error *ngIf="control?.hasError('minimunValue') && !control?.hasError('required')">
+      {{ CmmErrorMessagesObject.minimunValue }}
+  </mat-error>
+
+  <!-- Mensaje de error del API -->
+  <mat-error *ngIf="control?.errors?.['apiError']">
+    {{ control.errors?.['message']}}
+  </mat-error>
+
+</mat-form-field>

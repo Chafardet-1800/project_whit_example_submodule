@@ -1,0 +1,83 @@
+<!-- Contenedor principal de la celda de acción -->
+<div [ngSwitch]="actionSelected">
+
+  <!-- Acción para expander vista de detalle -->
+  <div *ngSwitchCase="'expandDetail'">
+
+    <!-- Ícono de expander detalle -->
+    <mat-icon class="rotate-arrowUp" [ngClass]="{'rotate-arrowUp': expandedElement}" [matTooltip]="element.value.tooltip" (click)="emitExpansion()">{{element.icon}}</mat-icon>
+
+  </div>
+
+  <!-- Acción para mostrar label de estatus -->
+  <div *ngSwitchCase="'statusAction'" class="rounded p-1 fs-12 text-nowrap d-flex justify-content-center" [ngStyle]="{ color: element.statusObject?.badge, border: '1.4px solid ' + element.statusObject?.badge}">
+
+    <!-- Ícono de status que sale en tamaño pequeño -->
+    <svg [matTooltip]="element?.statusObject?.text" [matTooltipPosition]="'left'" [class]="element?.statusObject?.imgClass" [ngClass]="element?.statusObject?.imgClass?'d-block status-icon d-sm-none m-0 p-0': 'd-none'"></svg>
+
+    <!-- Texto del estatus -->
+    <span [ngClass]="element?.statusObject?.imgClass?'d-none d-sm-block':'d-block'"> {{ element?.statusObject?.text }} </span>
+
+  </div>
+
+  <!-- Acción para mostrar mat-icon y emitir evento de click -->
+  <div *ngSwitchCase="'iconFunctionAction'">
+
+    <!-- mat-icon que puede mostrar cualquier tipo de ícono -->
+    <mat-icon [class]="element.class" [matTooltip]="element.tooltip" (click)="emitAction()">{{element.icon}}</mat-icon>
+
+  </div>
+
+  <!-- Acción para copiar texto de la celda -->
+  <div *ngSwitchCase="'copyTextAction'" matTooltip="Copiar" [class]="element.class" (click)="copyText(element.identification)">
+
+    <!-- Texto a copiar -->
+    <p [id]="element.identification" class="m-0 text-center">{{ element.value }}</p>
+
+  </div>
+
+  <!-- Acción de botón toggle -->
+  <div *ngSwitchCase="'slideToggleFunctionAction'" [matTooltip]="element.value.tooltip">
+
+    <!-- Eelemento de slide-toggle -->
+    <mat-slide-toggle [class]="element.class" [checked]="element.value.idStatus == '1'" (click)="emitAction()"></mat-slide-toggle>
+
+    <!-- Texto informativo -->
+    {{element.value.statusName}}
+
+  </div>
+
+  <!-- Acción de radio button  -->
+  <div *ngSwitchCase="'radioButtonFunctionAction'" [matTooltip]="element.value.tooltip">
+
+    <!-- Elemento del checkbox -->
+    <mat-checkbox class="example-margin" [checked]="element.value.checked" [disabled]="element.value.disabled" (click)="emitAction()">
+      {{ '' || element.value.statusName }}
+    </mat-checkbox>
+
+  </div>
+
+  <!-- Acción para pintar dependencias con su versión -->
+  <div *ngSwitchCase="'dependenciesEndpointActions'">
+
+    <!-- Contenedor de las dependencias -->
+    <div *ngIf="element.value.value">
+
+      <!-- Nombre de dependencia con su valor -->
+      <p *ngFor="let dependency of element.value.value | keyvalue">{{dependency.key}}: {{dependency.value}}</p>
+
+    </div>
+
+    <!-- En caso de que la dependencia no tenga valor -->
+    <p *ngIf="element.value=='N/A'">N/A</p>
+
+  </div>
+
+  <!-- Texto por default -->
+  <p *ngSwitchDefault [class]="element.class" [matTooltip]="element.tooltip" [matTooltipShowDelay]="500">
+
+    {{ element.value }}
+
+  </p>
+
+</div>

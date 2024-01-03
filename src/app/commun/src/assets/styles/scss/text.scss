@@ -1,0 +1,257 @@
+/*--------------------------------------------------------------------------------------------------------------------------------------
+ Fuentes
+--------------------------------------------------------------------------------------------------------------------------------------*/
+
+@import "./variables.scss";
+// @import '~bootstrap/dist/css/bootstrap.min.css';
+*:not(.material-icons) {
+  font-family: "Lato" !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Lato-Regular";
+}
+
+@media (max-width: 767px) {
+  .mat-paginator-range-label {
+    margin: 0px !important;
+  }
+  .mat-paginator-container {
+    padding: 0px !important;
+  }
+  .pbutton-0 {
+    padding: 0px !important;
+  }
+  .align-text-left {
+    width: 100% !important;
+  }
+  .align-text-right {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .align-text-left {
+    float: right !important;
+    width: max-content;
+  }
+  .align-text-right {
+    float: initial;
+    width: max-content;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .gwd-reCAPTCHA_2 {
+    transform: scale(0.74);
+    transform-origin: 0 0;
+    padding-left: 0px;
+  }
+}
+
+@media screen and (min-width: 925px) {
+  .gwd-reCAPTCHA_2 {
+    transform: initial;
+  }
+}
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-display: block;
+  font-weight: 400;
+  src: url(../../fonts/material/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../../fonts/Lato/Lato-Regular.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../../fonts/Lato/Lato-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../../fonts/Lato/Lato-Black.ttf") format("truetype");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../../fonts/Lato/Lato-Light.ttf") format("truetype");
+  font-weight: lighter;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------
+  Tono del texto (negrita, normal, claro)
+--------------------------------------------------------------------------------------------------------------------------------------*/
+
+.cc-txt-normal {
+  font-weight: 600 !important;
+}
+
+.cc-txt-bold {
+  font-weight: 900 !important;
+}
+
+.cc-txt-light {
+  font-weight: lighter;
+}
+
+.cc-txt-a {
+  text-decoration: none;
+}
+
+.cc-txt-break {
+  word-break: break-all;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------
+  Tamaños de texto
+--------------------------------------------------------------------------------------------------------------------------------------*/
+
+.fs-8 {
+  font-size: 8px !important;
+}
+
+.fs-10 {
+  font-size: 10px !important;
+}
+
+.fs-12 {
+  font-size: 12px !important;
+}
+
+.fs-14 {
+  font-size: 14px !important;
+}
+
+.fs-16 {
+  font-size: 16px !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
+}
+
+.fs-20 {
+  font-size: 20px !important;
+}
+
+.fs-22 {
+  font-size: 22px !important;
+}
+
+.fs-24 {
+  font-size: 24px !important;
+}
+
+.fs-26 {
+  font-size: 26px !important;
+}
+
+.fs-28 {
+  font-size: 28px !important;
+}
+
+.fs-30 {
+  font-size: 30px !important;
+}
+
+.fs-32 {
+  font-size: 32px !important;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------
+  Tamaño del texto en responsive
+--------------------------------------------------------------------------------------------------------------------------------------*/
+
+@media screen and (max-width: 380px) {
+  .cc-txt-sm-h5 {
+    font-size: 0.9rem;
+  }
+  .cc-txt-sm-p {
+    font-size: 0.85rem;
+  }
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------
+  Text colors
+--------------------------------------------------------------------------------------------------------------------------------------*/
+
+// Primary
+.cc-txt-primary {
+  color: $v-cc-primary;
+}
+
+.cc-txt-primary-disabled {
+  color: $v-cc-primary-disabled;
+}
+
+.cc-txt-primary-selected {
+  color: $v-cc-primary-selected;
+}
+
+// Secondary
+.cc-txt-secondary {
+  color: $v-cc-secondary;
+}
+
+.cc-txt-secondary-disabled {
+  color: $v-cc-secondary-disabled;
+}
+
+.cc-txt-secondary-selected {
+  color: $v-cc-secondary-selected;
+}
+
+// Notificaciones
+.cc-txt-success {
+  color: $v-cc-success !important;
+}
+
+.cc-txt-error {
+  color: $v-cc-error !important;
+}
+
+.cc-txt-warning {
+  color: $v-cc-warning !important;
+}
+
+.cc-txt-info {
+  color: $v-cc-info !important;
+}
+
+// Colores de textos
+.cc-txt {
+  color: $v-cc-txt !important;
+}
+
+.cc-back-txt {
+  color: $v-cc-back-txt !important;
+}
+
+.cc-title-txt {
+  color: $v-cc-title-txt !important;
+  p {
+    color: $v-cc-back-txt !important;
+  }
+}
+
+.cc-txt-white {
+  color: $v-cc-white !important;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------
+END TEXT colors
+--------------------------------------------------------------------------------------------------------------------------------------*/

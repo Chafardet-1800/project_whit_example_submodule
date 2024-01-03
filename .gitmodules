@@ -1,4 +1,4 @@
-[submodule "commun"]
-	path = commun
+[submodule "src/app/commun"]
+	path = src/app/commun
 	url = https://github.com/Chafardet-1800/library.git
 	branch = stable

@@ -1,0 +1,94 @@
+<!-- Input de fecha para una sola fecha -->
+<mat-form-field *ngIf="selectDateMode == 'single'" [subscriptSizing]="subscriptSizing" class="md-inline-form w-100 input-size" appearance="outline">
+
+  <!-- Label -->
+  <mat-label>{{label}}</mat-label>
+
+  <!-- Input -->
+  <input class="cursor-pointer" matInput [matDatepicker]="picker" [(ngModel)]="currentValue" [matDatepickerFilter]="dateFilter"
+    [required]="required" [errorStateMatcher]="errorMatcher()" [disabled]="disabled" [placeholder]="placeholder"
+    [readonly]="readOnly" (blur)="onTouch()" (dateChange)="emitValue()" [min]="minDate" [max]="startDate"
+    (click)="picker.open()">
+
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+
+  <!-- Botón para borrar las fechas -->
+  <button *ngIf="currentValue" matSuffix mat-icon-button (click)="currentValue = '';emitValue()">
+    <mat-icon>delete_outline</mat-icon>
+  </button>
+
+  <!-- Mensajes de error -->
+  <mat-error *ngIf="control?.errors?.['required']">
+    {{ CmmErrorMessagesObject.required }}
+  </mat-error>
+
+  <mat-error *ngIf="control?.errors?.['matDatepickerFilter'] && !control?.errors?.['required']">
+    {{ CmmErrorMessagesObject.matDatepickerFilter }}
+  </mat-error>
+
+  <!-- Mensaje de error del API -->
+  <mat-error *ngIf="control?.errors?.['apiError']">
+    {{ control.errors?.['message']}}
+  </mat-error>
+
+</mat-form-field>
+
+<!-- Input de fecha para un rango de fechas -->
+<form *ngIf="selectDateMode == 'range' && rangeControlsGroup" [formGroup]="rangeControlsGroup">
+
+  <mat-form-field class="md-inline-form w-100 input-size" [subscriptSizing]="subscriptSizing" appearance="outline">
+
+    <!-- Label -->
+    <mat-label>{{label}}</mat-label>
+
+    <!-- Control para setear inputs de rango de fecha -->
+    <mat-date-range-input [required]="required" [rangePicker]="rangePicker" [max]="daterange"
+      (click)="rangePicker.open()">
+
+      <!-- Input de primera fecha -->
+      <input class="cursor-pointer" matStartDate formControlName="{{rangeControls[0]}}" placeholder="Fecha de inicio" readonly>
+
+      <!-- Input de segunda fecha -->
+      <input class="cursor-pointer" matEndDate formControlName="{{rangeControls[1]}}" placeholder="Fecha de fin" readonly (dateChange)="emitRangeDateChanges()">
+
+    </mat-date-range-input>
+
+    <!-- Control para abrir calendario -->
+    <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+
+    <!-- Botón para borrar las fechas -->
+    <button *ngIf="rangeControlsGroup.controls[rangeControls[0]]?.value" matSuffix mat-icon-button
+      (click)="emitRangeDateChanges(true)">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+
+    <!-- Frame de calendario para escoger fecha -->
+    <mat-date-range-picker #rangePicker>
+      <!-- Comentado porque es más fácil escoger fechas sin esto -->
+      <!-- <mat-date-range-picker-actions>
+        <button mat-button matDateRangePickerCancel>Cancelar</button>
+        <button mat-raised-button matDateRangePickerApply class="cc-btn-primary" style="font-weight: 600;"
+          (click)="emitRangeDateChanges()">Filtrar</button>
+      </mat-date-range-picker-actions> -->
+    </mat-date-range-picker>
+
+    <!-- Mensajes de error -->
+    <mat-error *ngIf="rangeControlsGroup.controls[rangeControls[1]]?.errors?.['required']">
+      {{ CmmErrorMessagesObject.required }}
+    </mat-error>
+
+    <!-- Mensaje de error para fecha inválida -->
+    <mat-error
+      *ngIf="checkDateError(rangeControlsGroup.controls[rangeControls[1]]) && !rangeControlsGroup.controls[rangeControls[1]]?.errors?.['required']">
+      {{ CmmErrorMessagesObject.matDatepickerFilter }}
+    </mat-error>
+
+    <!-- Mensaje de error del API -->
+    <mat-error *ngIf="rangeControlsGroup.controls[rangeControls[1]]?.errors?.['apiError']">
+      {{ group.errors?.['message']}}
+    </mat-error>
+
+  </mat-form-field>
+
+</form>

@@ -1,0 +1,50 @@
+<!-- Titulo -->
+<h5 class="cc-txt text-center my-3">
+  {{ inputData.title }}
+</h5>
+
+<!-- Divider -->
+<mat-divider class="my-1 mx-auto w-90"></mat-divider>
+
+<!-- Contenido -->
+<div mat-dialog-content>
+
+  <!-- Pregunta -->
+  <div class="text-center" *ngIf="this.inputData.isQuestion">
+    <!-- Mensaje Aprobado -->
+    <p *ngIf="inputData.type">
+      ¿Está seguro que desea <b class="cc-txt-bold">APROBAR</b> este {{inputData.method}}?
+    </p>
+
+    <!-- Mensaje Rechazado -->
+    <p *ngIf="!inputData.type">
+      ¿Está seguro que desea <b class="cc-txt-bold">RECHAZAR</b> este {{inputData.method}}?
+    </p>
+  </div>
+
+  <!-- Mensaje -->
+  <div class="text-center" *ngIf="!this.inputData.isQuestion">
+    <p>
+      {{inputData.message}}
+    </p>
+  </div>
+
+  <!-- Contenedor del formControl -->
+  <div *ngIf="componentInput" class="mt-4">
+
+    <!-- Este es el input para aprobar/rechazar,  -->
+    <cmm-cmp-i-text [minLength]="3" [maxLength]="100" [implementCustomInput]="true" [label]="inputData.type == true ? 'Número de referencia' : 'Motivo'" [placeholder]="inputData.type == true ? 'Ej: 4789225140' : 'Ej: La cuenta es inválida'" [formControl]="componentInput"></cmm-cmp-i-text>
+
+  </div>
+
+</div>
+
+<!-- Botones -->
+<div mat-dialog-actions class="d-flex justify-content-around px-2 py-0 mb-2">
+
+  <!-- Cancelar -->
+  <cmm-cmp-b-button class="col-12 col-md-4 mb-2 mb-md-0 px-2" [button_text]="'Cancelar'" [buttonType]="'warningOutline'" mat-dialog-close></cmm-cmp-b-button>
+
+  <!-- Aprobar/Rechazar -->
+  <cmm-cmp-b-button cdkFocusInitial class="col-12 col-md-4 px-2" [button_text]="inputData.type ? 'Aprobar' : 'Rechazar'" [buttonType]="inputData.type ? 'success' : 'cancel'" (submit)="onSubmit()"></cmm-cmp-b-button>
+</div>

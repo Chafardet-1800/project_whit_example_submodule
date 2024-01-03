@@ -1,0 +1,14 @@
+<mat-card class="w-100 shadowBorder operationCard p-0 overflow-hidden cursor-pointer rounded" style="height: 150px;">
+  <div class="row justify-content-center w-100 h-100 m-0 p-0">
+    <!-- Imagen del tipo de opción -->
+    <div class="col-6 h-100 d-flex justify-content-center align-items-center m-0 p-0 cc_bg_secondary_bus border_radius_inh">
+      <img class="" [ngStyle]="{'width.px': optionInfo.imgDimentions.width,'height.px': optionInfo.imgDimentions.height}" [src]="optionInfo.imgUrl" alt="">
+    </div>
+
+    <!-- Texto informativo del tipo de opción -->
+    <div class="col-6 h-100 text-center d-flex justify-content-center align-items-center flex-column">
+      <h5 class="ccng-bold">{{optionInfo.title}}</h5>
+      <p>{{optionInfo.subtitle}}</p>
+    </div>
+  </div>
+</mat-card>

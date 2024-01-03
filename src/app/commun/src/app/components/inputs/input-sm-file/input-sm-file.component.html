@@ -1,0 +1,62 @@
+<div class="row justify-content-center m-0 w-100">
+
+  <!-- Preview de la imagen -->
+  <div *ngIf="fileImageUrl" class="col-12 previewBox d-flex justify-content-center align-items-center m-0 my-2 mb-3 overflow-hidden p-0">
+
+    <!-- Imagen del preview -->
+    <img [src]="fileImageUrl" height="150" class="imgFile" alt="" style="width: 200px; max-height:200px">
+
+  </div>
+
+  <!-- Input de archivo -->
+  <mat-form-field [subscriptSizing]="subscriptSizing" class="col-12 m-0 p-0" appearance="outline">
+
+    <!-- Label -->
+    <mat-label>{{displayFileSize? label +' '+fileSize: label}}</mat-label>
+
+    <!-- Input de tipo file (Oculto) -->
+    <input type="file" #fileInput class="position-absolute opacity-0 top-0 cursor-pointer" (change)="setFile($event)" (click)="resetInputFiles($event)">
+
+    <!-- Input del formfield -->
+    <input
+    matInput
+    class="cursor-pointer"
+    [placeholder]="placeholder"
+    [required]="required"
+    [readonly]="true"
+    [errorStateMatcher]="errorMatcher()"
+    [(ngModel)]="fileName"
+    (blur)="onTouch()"
+    (click)="fileInput.click()"
+    >
+
+      <!-- Botón de adjuntar archivo -->
+    <button class="cursor-pointer" matIconSuffix mat-icon-button (click)="fileName? removeFile():fileInput.click()">
+      <mat-icon [matTooltip]="file? 'Reemplazar':'Adjuntar'">{{fileName? 'delete_outline':'attach_file'}}</mat-icon>
+    </button>
+
+    <!-- Mensajes de error -->
+
+    <!-- Required -->
+    <mat-error *ngIf="control?.errors?.['required']">
+      {{ CmmErrorMessagesObject.required }}
+    </mat-error>
+
+    <!-- Tamaño máximo permitido -->
+    <mat-error *ngIf="control?.errors?.['maxFileSize'] && !control?.errors?.['required'] && !control?.errors?.['fileType']">
+      {{ CmmErrorMessagesObject.maxFileSize }}
+    </mat-error>
+
+    <!-- Tipo de archivo permitido -->
+    <mat-error *ngIf="control?.errors?.['fileType'] && !control?.errors?.['required']">
+      {{ CmmErrorMessagesObject.fileType }}
+    </mat-error>
+
+    <!-- Mensaje de error del API -->
+    <mat-error *ngIf="control?.errors?.['apiError']">
+      {{ control.errors?.['message']}}
+    </mat-error>
+
+  </mat-form-field>
+
+</div>

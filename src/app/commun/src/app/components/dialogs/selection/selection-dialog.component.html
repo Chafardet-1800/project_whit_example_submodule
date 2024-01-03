@@ -1,0 +1,47 @@
+<div class="container-fluid px-4 selection_border_radius">
+
+  <!-- Título del diálogo -->
+  <h4 class="pt-3 px-1">{{data.title}}</h4>
+
+  <!-- Contenedor principal del contenido del diálogo -->
+  <div class="row p-3 pb-4">
+
+    <!-- Input de búsqueda -->
+    <!-- <mat-form-field *ngIf="searchValueForm" class="col-12 p-0" appearance="outline">
+      <mat-label>{{this.data.label}}</mat-label>
+      <input matInput type="text" [formControl]="searchValueForm">
+    </mat-form-field> -->
+
+    <!-- Input de búsqueda -->
+    <div class="col-12 p-0">
+
+      <!-- Input de texto -->
+      <cmm-cmp-i-text [formControl]="componentInput" [label]="this.data.label"></cmm-cmp-i-text>
+
+    </div>
+
+    <!-- Opciones disponibles -->
+    <div class="col-12 d-flex px-3 py-4 justify-content-between cursor-pointer border-bottom" *ngFor="let option of filteredList" (click)="selectOption(option)">
+
+      <!-- Imagen de la opción -->
+      <img *ngIf="data.displayImages" [src]="data.imagesRoute + option[imageSearchKey].toLowerCase() + '.svg'" [ngStyle]="{'width.px': data.imgDimentions.width, 'height.px': data.imgDimentions.height}" alt="">
+
+      <!-- Texto de la opción -->
+      <span class="d-flex align-items-center justify-content-center">
+        <p *ngIf="siblingOptionValue" class="m-0">{{option[siblingOptionValue] + ' | '}}</p>
+        <p class="m-0 font-weight-bold">{{option[optionValue]}}</p>
+      </span>
+
+    </div>
+
+    <!-- Cover por si no se encontró nada al filtrar -->
+    <div *ngIf="!filteredList.length" class="col-12">
+
+      <!-- Componente de cover -->
+      <cmm-cmp-c-cover [coverType]="'unavailable'" [title]="'No se ha encontrado ninguna opción'"></cmm-cmp-c-cover>
+
+    </div>
+
+  </div>
+
+</div>

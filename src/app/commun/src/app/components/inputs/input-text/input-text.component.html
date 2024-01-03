@@ -1,0 +1,52 @@
+<!-- Versión nueva del input -->
+<mat-form-field *ngIf="implementCustomInput" [subscriptSizing]="subscriptSizing" class="col-12 input-size" appearance="outline">
+
+  <!-- Label -->
+  <mat-label>{{label}}</mat-label>
+
+  <!-- Input -->
+  <input matInput type="text" [placeholder]="placeholder" [required]="required" cmm-di-number-format
+    [onlyNumber]="onlyNumber" [allowCopy]="allowCopy" [allowCut]="allowCut" [allowClicWithMouse]="allowClicWithMouse" [readonly]="readOnly" [minlength]="minLength" [maxlength]="maxLength"
+    [(ngModel)]="currentValue" [errorStateMatcher]="errorMatcher()" [disabled]="disabled" (blur)="onTouch()"
+    (input)="emitValue()" />
+
+  <!-- Espacio donde puede ir cualquier cosa -->
+  <span class="pe-3" matSuffix #dinamycSuffix>
+    <ng-content class="w-100">
+    </ng-content>
+  </span>
+
+  <!-- Mensajes de error del input -->
+
+  <!-- Required -->
+  <mat-error *ngIf="control?.errors?.['required']">
+    {{ CmmErrorMessagesObject.required }}
+  </mat-error>
+
+  <!-- Minlength -->
+  <mat-error
+    *ngIf="control?.errors?.['minlength'] && !control?.errors?.['required'] && !control?.errors?.['pattern'] && !control?.errors?.['letters']">
+    {{ CmmErrorMessagesObject.minLength }}
+  </mat-error>
+
+  <!-- Maxlength -->
+  <mat-error *ngIf="control?.errors?.['maxlength'] && !control?.errors?.['pattern']">
+    {{ CmmErrorMessagesObject.maxLength }}
+  </mat-error>
+
+  <!-- Mensaje de error de tipo pattern -->
+  <mat-error *ngIf="control?.errors?.['pattern'] && !control?.errors?.['required']">
+    {{ CmmErrorMessagesObject[patternMessageType] }}
+  </mat-error>
+
+  <!-- Para que el campo tenga al menos una letra-->
+  <mat-error *ngIf="control?.errors?.['letters'] && !control?.errors?.['required']">
+    {{ CmmErrorMessagesObject.mustHaveLetter }}
+  </mat-error>
+
+  <!-- Mensaje de error del API -->
+  <mat-error *ngIf="control?.errors?.['apiError']">
+    {{ control.errors?.['message']}}
+  </mat-error>
+
+</mat-form-field>

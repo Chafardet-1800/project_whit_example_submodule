@@ -1,0 +1,38 @@
+<div class="align-items-center alert shadowBorder rounded containerMessage h-100" [ngClass]="data.typeIcon == 'default' ? 'defaultNew' : data.typeIcon == 'success' ? 'cc-bl-success cc-bg-white': data.typeIcon == 'error' ? 'cc-bl-error cc-bg-white' : data.typeIcon == 'warning' ? 'cc-bl-warning cc-bg-white' :
+    data.typeIcon == 'info' ? 'cc-bl-info cc-bg-white' : ''" [ngStyle]="{opacity: showAlert, display: alertDisplay}">
+
+    <!-- Ícono que indica qué tipo de alarta es -->
+    <div class="d-none d-md-flex align-items-center">
+
+        <mat-icon aria-hidden="false" aria-label="icon" [ngClass]="{'ccng-default': data.typeIcon == 'default',
+                'cc-txt-success': data.typeIcon == 'success',
+                'cc-txt-error': data.typeIcon == 'error',
+                'cc-txt-warning': data.typeIcon == 'warning',
+                'cc-txt-info': data.typeIcon == 'info' }" style="overflow: visible !important;" class="me-4 me-sm-0">
+
+            {{data.icon}}
+        </mat-icon>
+
+    </div>
+
+    <!-- Textos -->
+    <div class="text cc-txt">
+
+        <!-- Texto principal de la alerta -->
+        <p class="m-0 fs-16 ">
+            {{ data.text }}
+        </p>
+
+        <!-- Error que muestra la alerta -->
+        <p class="m-0 fs-14 cc-txt-bold" *ngIf="data.errorText">
+            {{ data.errorText }}
+        </p>
+
+    </div>
+
+    <!-- Botón de cierre -->
+    <button class="closeButton" (click)="change()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+</div>
